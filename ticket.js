@@ -28,6 +28,7 @@ const TicketSystem = () => {
 	let start = document.getElementById("start");
 	let queueStatus = document.getElementById("queue-status");
 	let clicks = document.getElementById("clicks");
+	let reset = document.getElementById("reset");
 
 	let ticketQueue = Queue();
 	let array = new Array(100).fill(0);
@@ -93,7 +94,9 @@ const TicketSystem = () => {
 
 	// update current status
 	const updateCurrentStatus = () => {
-		saleNumber.innerText = `${click < max && click > 0 ? click : max}/${max}`;
+		saleNumber.innerText = `${
+			click < max && click > 0 ? click : max
+		}/${max}`;
 		tickerRemaining.innerText = `${
 			max - (click < max && click > 0 ? click : 0)
 		} tickets available`;
@@ -103,6 +106,7 @@ const TicketSystem = () => {
 
 	milButton.addEventListener("click", () => handleMillionClicks(array));
 	start.addEventListener("click", startDemo);
+	reset.addEventListener("click", () => window.location.reload());
 };
 
 TicketSystem();
