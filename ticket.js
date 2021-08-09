@@ -8,7 +8,7 @@ const Queue = () => {
 			_queue.push(value);
 		},
 		dequeue: () => {
-			return _queue[_front++];
+			return _rear - _front > 0 ? _queue[_front++] : null;
 		},
 		peek: () => {
 			return _queue[_front];
@@ -27,11 +27,13 @@ const TicketSystem = () => {
 	let noti = document.getElementById("noti");
 	let start = document.getElementById("start");
 	let queueStatus = document.getElementById("queue-status");
+	let clicks = document.getElementById("clicks");
 
 	let ticketQueue = Queue();
 	let array = new Array(100).fill(0);
-	let sold = 0;
+	let click = 0;
 	let billID = 20210900000;
+	const max = 40000;
 
 	// perform a million clicks
 	const startDemo = async () => {
@@ -61,12 +63,14 @@ const TicketSystem = () => {
 	// handle one click
 	const handleOneClick = async () => {
 		await sleep();
-		if (sold++ < 40000) {
-			handleInput();
-			updateCurrentStatus();
+		clicks.innerText = `${click} clicks`;
+		handleInput();
+		updateCurrentStatus();
+		if (click++ < max) {
 			handleSold();
 		} else {
 			handleSoldOut();
+			updateCurrentStatus();
 		}
 	};
 
@@ -84,14 +88,16 @@ const TicketSystem = () => {
 	// sold out
 	const handleSoldOut = () => {
 		ticketQueue.dequeue();
-		noti.innerHTML = `<h3 style="color: red;">Sold out</h3>`;
+		noti.innerHTML = `<h3 style="color: red;">Sold out ${click}</h3>`;
 	};
 
 	// update current status
 	const updateCurrentStatus = () => {
-		saleNumber.innerText = `${sold}/40000`;
-		tickerRemaining.innerText = `${40000 - sold} tickets available`;
-		saleProgress.innerHTML = `<progress value=${sold} max=40000></progress>`;
+		saleNumber.innerText = `${click < max && click > 0 ? click : max}/${max}`;
+		tickerRemaining.innerText = `${
+			max - (click < max && click > 0 ? click : 0)
+		} tickets available`;
+		saleProgress.innerHTML = `<progress value=${click} max=${max}></progress>`;
 		queueStatus.innerText = `${ticketQueue.size()} in queue`;
 	};
 
