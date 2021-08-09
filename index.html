@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket booking</title>
+
+</head>
+
+<body>
+  <button id="start">Start</button>
+  <button id='mil-click' style="display: none;">1,000,000 clicks</button>
+  <div class="current-status">
+    <h1 id='sale-number'>0/40000</h1>
+    <div id="sale-progress">
+      <progress value=0 max=40000></progress>
+    </div>
+    <h2 id="ticket-remaining">40000 tickets available</h2>
+    <h2 id="queue-status">0 in queue</h2>
+  </div>
+
+  <div id="noti">
+    <h3 style="color: green;">Waiting...</h3>
+  </div>
+
+  <script src="ticket.js"></script>
+</body>
+
+</html>
