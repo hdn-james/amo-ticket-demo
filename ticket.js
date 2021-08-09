@@ -14,7 +14,7 @@ const Queue = () => {
 			return _queue[_front];
 		},
 		size: () => {
-			return _rear - _front - 1;
+			return _rear - _front;
 		},
 	};
 };
@@ -58,7 +58,7 @@ const TicketSystem = () => {
 		);
 	};
 
-  // handle one click
+	// handle one click
 	const handleOneClick = async () => {
 		await sleep();
 		if (sold++ < 40000) {
@@ -76,19 +76,19 @@ const TicketSystem = () => {
 	};
 
 	// dequeue
-	const handleSold = async () => {
+	const handleSold = () => {
 		let id = ticketQueue.dequeue();
 		noti.innerHTML = `<h3 style="color: green;">Payment success, bill id = ${id}</h3>`;
 	};
 
-  // sold out 
-	const handleSoldOut = async () => {
+	// sold out
+	const handleSoldOut = () => {
 		ticketQueue.dequeue();
 		noti.innerHTML = `<h3 style="color: red;">Sold out</h3>`;
 	};
 
-  // update current status
-	const updateCurrentStatus = async () => {
+	// update current status
+	const updateCurrentStatus = () => {
 		saleNumber.innerText = `${sold}/40000`;
 		tickerRemaining.innerText = `${40000 - sold} tickets available`;
 		saleProgress.innerHTML = `<progress value=${sold} max=40000></progress>`;
